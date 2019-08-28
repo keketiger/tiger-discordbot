@@ -11,4 +11,4 @@ client.on('message', msg => {
   if (msg.content === 'noteveryone') msg.channel.send("@everyone (noteveryone), salut à tous !");
 });
 
-client.login('INSERT YOUR CLIENT TOKEN');
+client.login('NjE2MzM5OTU5Njk5MzQxMzkx.XWbJoQ.pGmZGWJ-KwD_oyWF-ozED54ruCo');
