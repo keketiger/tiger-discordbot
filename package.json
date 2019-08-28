@@ -1,0 +1,12 @@
+{
+  "name": "projet",
+  "version": "1.0.0",
+  "description": "Projet Tiger Discord Bot",
+  "main": "index.js",
+  "repository": "https://github.com/keketiger/tiger-discordbot.git",
+  "author": "keketiger <pro@keketiger.fr>",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "discordjs/discord.js"
+  }
+}
