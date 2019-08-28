@@ -1,18 +1,32 @@
 const { Client, Collection } = require("discord.js");
 const { TOKEN, PREFIX } = require("./config");
 const client = new Client({ disableEveryone: true });
+const fs = require("fs");
 
 client.PREFIX = PREFIX;
-
 client.commands = new Collection();
-client.commands.set("repeat", require("./commands/repeat.js"));
-client.commands.set("role", require("./commands/role.js"));
-client.commands.set("info", require("./commands/info.js"));
 
-client.on("ready", () => require("./events/ready.js")(client));
-client.on("message", msg => require("./events/message.js")(client, msg));
-client.on("guildMemberAdd", member => require("./events/guildMemberAdd.js")(client, member));
-client.on("guildMemberRemove", member => require("./events/guildMemberRemove.js")(client, member));
+fs.readdir("./events/", (err, files) => {
+  if (err) return console.error;
+  files.forEach(file => {
+    if (!file.endsWith(".js")) return undefined;
+    const event = require(`./events/${file}`);
+    const eventName = file.split(".")[0];
+    console.log(`[TigerBot] Evénement (${eventName}) chargé.`);
+    client.on(eventName, event.bind(null, client));
+  });
+});
+
+fs.readdir("./commands/", (err, files) => {
+  if (err) return console.error;
+  files.forEach(file => {
+    if (!file.endsWith(".js")) return undefined;
+    const props = require(`./commands/${file}`);
+    const cmdName = file.split(".")[0];
+    console.log(`[TigerBot] Commande (${cmdName}) chargée.`);
+    client.commands.set(cmdName, props);
+  });
+});
 
 client.login(TOKEN);
 client.on("error", console.error);
