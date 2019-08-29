@@ -1,9 +1,10 @@
 const { Client, Collection } = require("discord.js");
-const { TOKEN, PREFIX } = require("./config");
+const { TOKEN } = require("./config");
 const client = new Client({ disableEveryone: true });
 const fs = require("fs");
 
-client.PREFIX = PREFIX;
+require("./util/functions")(client);
+client.mongoose = require("./util/mongoose");
 client.commands = new Collection();
 
 fs.readdir("./events/", (err, files) => {
@@ -28,6 +29,7 @@ fs.readdir("./commands/", (err, files) => {
   });
 });
 
+client.mongoose.init();
 client.login(TOKEN);
 client.on("error", console.error);
 client.on("warn", console.warn);
