@@ -8,7 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "discord.js": "discordjs/discord.js",
-    "mongoose": "^5.6.11"
+    "mongoose": "^5.7.5"
   },
   "devDependencies": {
     "eslint": "^6.2.2",
